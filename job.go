@@ -2,6 +2,8 @@ package cron
 
 import (
 	"time"
+
+	"github.com/hatchify/atoms"
 )
 
 // New creates a new job
@@ -10,7 +12,7 @@ func New(fn func()) (jp *Job) {
 	// Callback returns false if job was canceled
 	j.callback = func() bool {
 		// Ignore firing job if canceled
-		if !j.Canceled {
+		if !j.Canceled.Get() {
 			fn()
 			return true
 		}
@@ -25,7 +27,7 @@ type Job struct {
 	callback func() bool
 
 	// Prevents execution if set true before target time
-	Canceled bool
+	Canceled atoms.Bool
 }
 
 // runAfter will run a function after waiting for a given duration
