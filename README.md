@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Hatch1fy/cancelable-cron"
+	"github.com/hatchify/cancelable-cron"
 )
 
 func main() {
